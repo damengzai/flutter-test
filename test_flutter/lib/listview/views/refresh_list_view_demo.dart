@@ -29,13 +29,22 @@ class _RefreshListViewDemoState extends State<_RefreshListViewDemoStateful> {
     return ListViewItem(Key(index.toString()), data);
   }
 
+  //获取列表数据
+  Future<List> getListData([Map<String, dynamic> params]) async{
+    dynamic testElement = params.values.elementAt(0);
+    for(int i = 0; i < listData.length; i++) {
+        listData[i] = listData[i]+testElement.toString();
+    }
+    return listData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Column(
         children: <Widget>[
           new Expanded(
-            child: RefreshListView(listData, createListItem),
+            child: RefreshListView(getListData, createListItem),
           ),
         ],
       ),
