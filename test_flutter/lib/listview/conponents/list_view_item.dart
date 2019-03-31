@@ -11,8 +11,8 @@ class ListViewItem extends StatelessWidget {
       color: Colors.white,
       elevation: 4.0,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(this.title),
+        padding: const EdgeInsets.fromLTRB(8.0,20.0,8.0,20.0),
+        child: Text(this.title, style: new TextStyle(color: Colors.blue, fontSize: 20,),),
       ),
     );
   }

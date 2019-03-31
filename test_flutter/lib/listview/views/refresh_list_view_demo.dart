@@ -8,7 +8,7 @@ class RefreshListViewDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '列表',
+      title: '封装列表',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: _RefreshListViewDemoStateful(),
     );
