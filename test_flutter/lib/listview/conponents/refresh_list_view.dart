@@ -16,6 +16,7 @@ class RefreshListView extends StatefulWidget {
 class _RefreshListViewState extends State<RefreshListView> {
   List items = new List(); //列表数据
   bool isLoading = false; //是否正在加载中
+  int pageIndex = 0;
   ScrollController _scrollController = new ScrollController();
   @override
   void initState() {
@@ -54,7 +55,7 @@ class _RefreshListViewState extends State<RefreshListView> {
   //模拟请求
   Future<List> mockHttpRequest() async {
     if (widget.listData is Function) {
-      final listObject = await widget.listData({'page': 'A'});
+      final listObject = await widget.listData({'page': ++pageIndex});
       return listObject;
     } else {
       return [];

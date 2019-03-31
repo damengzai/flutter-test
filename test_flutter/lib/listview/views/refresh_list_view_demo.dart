@@ -23,7 +23,7 @@ class _RefreshListViewDemoStateful extends StatefulWidget {
 }
 
 class _RefreshListViewDemoState extends State<_RefreshListViewDemoStateful> {
-  List<String> listData = ['Apple', 'Orange', 'Banana', 'Pitch'];
+  List<String> listData = ['Apple', 'Orange', 'Banana', 'Peach', 'Blueberry', 'Strawberry', 'Peanut', 'Watermelon'];
 
   Widget createListItem(index, data) {
     return ListViewItem(Key(index.toString()), data);
