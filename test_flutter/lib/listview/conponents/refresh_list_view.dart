@@ -41,6 +41,7 @@ class _RefreshListViewState extends State<RefreshListView> {
               return widget.listItemView(index, items[index]);
             }
           },
+          physics: const AlwaysScrollableScrollPhysics(),
           controller: _scrollController,
         ),
         onRefresh: _handleRefresh);
