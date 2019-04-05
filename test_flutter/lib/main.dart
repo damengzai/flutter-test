@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
+import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,8 +14,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
       routes: <String, WidgetBuilder> {
         '/refreshList': (BuildContext context) => new RefreshListViewDemo(),//list列表页
+        '/viewPager' : (BuildContext context) => new ViewPagerDemo(),//viewpager
       }
     );
   }
@@ -44,6 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _toRefreshListViewDemo() {
     Navigator.pushNamed(context, '/refreshList');
+  }
+  void _toViewPagerDemo() {
+    Navigator.pushNamed(context, '/viewPager');
   }
 
   @override
@@ -87,7 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            RaisedButton(onPressed: _toRefreshListViewDemo,child: Text("列表页"),)
+            RaisedButton(onPressed: _toRefreshListViewDemo,child: Text("列表页"),),
+            RaisedButton(onPressed: _toViewPagerDemo, child: Text("Viewpager"),)
           ],
         ),
       ),
