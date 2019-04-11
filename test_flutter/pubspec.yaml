@@ -22,6 +22,14 @@ dependencies:
 
   #dio
   dio: ^2.1.0
+
+  #redux
+  flutter_redux: ^0.5.3
+
+
+  #https://pub.flutter-io.cn/packages/fish_redux#-installing-tab-
+  #fish_redux
+  fish_redux: ^0.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
