@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
+import 'package:test_flutter/fish_redux/counter_fish_redux/main_page.dart';
+import 'package:test_flutter/fish_redux/main_page.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
@@ -22,6 +24,11 @@ class MyApp extends StatelessWidget {
           '/viewPager': (BuildContext context) => new ViewPagerDemo(),
           //viewpager
           '/request': (BuildContext context) => new RequestRoute(),
+          //fish redux
+          '/fishRedux': (BuildContext context) => new FishReduxMainPage(),
+          //counter fish redux
+          '/counterFishRedux': (BuildContext context) =>
+              new CounterFishReduxPageStateless(),
         });
   }
 }
@@ -58,6 +65,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _toRequestRoute() {
     Navigator.pushNamed(context, '/request');
+  }
+
+  _toFishRedux() {
+    Navigator.pushNamed(context, '/fishRedux');
+  }
+
+  _toCounterFishRedux() {
+    Navigator.pushNamed(context, '/counterFishRedux');
   }
 
   @override
@@ -112,6 +127,14 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               onPressed: _toRequestRoute,
               child: Text("Request"),
+            ),
+            RaisedButton(
+              onPressed: _toFishRedux,
+              child: Text("FishRedux"),
+            ),
+            RaisedButton(
+              onPressed: _toCounterFishRedux,
+              child: Text("CounterFishRedux"),
             )
           ],
         ),
