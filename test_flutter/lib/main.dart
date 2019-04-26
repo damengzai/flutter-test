@@ -5,6 +5,8 @@ import 'package:test_flutter/fish_redux/main_page.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
+import 'customPaintView/draggable_widget_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
           //counter fish redux
           '/counterFishRedux': (BuildContext context) =>
               new CounterFishReduxPageStateless(),
+          //Draggable
+          '/draggable': (BuildContext context) => new DraggableWidgetPage(),
         });
   }
 }
@@ -73,6 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _toCounterFishRedux() {
     Navigator.pushNamed(context, '/counterFishRedux');
+  }
+
+  _toDraggablePage() {
+    Navigator.pushNamed(context, '/draggable');
   }
 
   @override
@@ -135,6 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               onPressed: _toCounterFishRedux,
               child: Text("CounterFishRedux"),
+            ),
+            RaisedButton(
+              onPressed: _toDraggablePage,
+              child: Text("Draggable"),
             )
           ],
         ),
