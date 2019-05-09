@@ -5,6 +5,9 @@ import 'package:test_flutter/fish_redux/main_page.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
+import 'animation/animated_container_app.dart';
+import 'animation/explicit_animation/explicit_animation_page.dart';
+import 'animation/fade_in_and_out_box.dart';
 import 'customPaintView/draggable_widget_page.dart';
 
 void main() => runApp(MyApp());
@@ -30,9 +33,17 @@ class MyApp extends StatelessWidget {
           '/fishRedux': (BuildContext context) => new FishReduxMainPage(),
           //counter fish redux
           '/counterFishRedux': (BuildContext context) =>
-              new CounterFishReduxPageStateless(),
+          new CounterFishReduxPageStateless(),
           //Draggable
           '/draggable': (BuildContext context) => new DraggableWidgetPage(),
+          //animation
+          '/animation': (BuildContext context) => new AnimatedContainerApp(),
+          //fadeInAndOutAnimation
+          '/fadeInAndOutAnim': (BuildContext context) =>
+          new FadeInAndOutBoxPage(),
+          //explicitAnimation 显式动画，更多的实现自己的效果
+          '/explicitAnimation': (
+              BuildContext context) => new ExplicitAnimationPage(),
         });
   }
 }
@@ -83,6 +94,18 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/draggable');
   }
 
+  _toAnimationPage() {
+    Navigator.pushNamed(context, '/animation');
+  }
+
+  _toFadeInAndOutAnim() {
+    Navigator.pushNamed(context, '/fadeInAndOutAnim');
+  }
+
+  _toExplicitAnimation() {
+    Navigator.pushNamed(context, '/explicitAnimation');
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -122,7 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .display1,
             ),
             RaisedButton(
               onPressed: _toRefreshListViewDemo,
@@ -147,7 +173,17 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               onPressed: _toDraggablePage,
               child: Text("Draggable"),
-            )
+            ),
+            RaisedButton(
+              onPressed: _toAnimationPage,
+              child: Text("Animation"),
+            ),
+            RaisedButton(
+              onPressed: _toFadeInAndOutAnim,
+              child: Text("FadeInAndOut"),
+            ),
+            RaisedButton(onPressed: _toExplicitAnimation,
+              child: Text("ExplicitAnimation"),)
           ],
         ),
       ),
