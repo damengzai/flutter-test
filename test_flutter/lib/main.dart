@@ -6,8 +6,12 @@ import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
 import 'animation/animated_container_app.dart';
+import 'animation/animated_list/animated_list_sample.dart';
 import 'animation/explicit_animation/explicit_animation_page.dart';
 import 'animation/fade_in_and_out_box.dart';
+import 'animation/hero/hero_animation.dart';
+import 'animation/hero/hero_animation_page2.dart';
+import 'animation/hero/radial/radial_hero_animation.dart';
 import 'customPaintView/draggable_widget_page.dart';
 
 void main() => runApp(MyApp());
@@ -33,17 +37,27 @@ class MyApp extends StatelessWidget {
           '/fishRedux': (BuildContext context) => new FishReduxMainPage(),
           //counter fish redux
           '/counterFishRedux': (BuildContext context) =>
-          new CounterFishReduxPageStateless(),
+              new CounterFishReduxPageStateless(),
           //Draggable
           '/draggable': (BuildContext context) => new DraggableWidgetPage(),
           //animation
           '/animation': (BuildContext context) => new AnimatedContainerApp(),
           //fadeInAndOutAnimation
           '/fadeInAndOutAnim': (BuildContext context) =>
-          new FadeInAndOutBoxPage(),
+              new FadeInAndOutBoxPage(),
           //explicitAnimation 显式动画，更多的实现自己的效果
-          '/explicitAnimation': (
-              BuildContext context) => new ExplicitAnimationPage(),
+          '/explicitAnimation': (BuildContext context) =>
+              new ExplicitAnimationPage(),
+          //AnimatedList
+          '/animatedList': (BuildContext context) => new AnimatedListSample(),
+          //HeroAnimation
+          '/heroAnimation': (BuildContext context) => new HeroAnimation(),
+          //HeroAnimationPage2
+          '/heroAnimationPage2': (BuildContext context) =>
+              new HeroAnimationPage(),
+          //RadialHeroAnimation
+          '/radialHeroAnimation': (BuildContext context) =>
+              new RadialExpansionDemo(),
         });
   }
 }
@@ -106,6 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/explicitAnimation');
   }
 
+  _toAnimatedList() {
+    Navigator.pushNamed(context, '/animatedList');
+  }
+
+  _toHeroAnimation() {
+    Navigator.pushNamed(context, '/heroAnimation');
+  }
+
+  _toRadialHeroAnimation() {
+    Navigator.pushNamed(context, '/radialHeroAnimation');
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -145,45 +171,56 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .display1,
+              style: Theme.of(context).textTheme.display1,
             ),
             RaisedButton(
               onPressed: _toRefreshListViewDemo,
-              child: Text("列表页"),
+              child: const Text("列表页"),
             ),
             RaisedButton(
               onPressed: _toViewPagerDemo,
-              child: Text("Viewpager"),
+              child: const Text("Viewpager"),
             ),
             RaisedButton(
               onPressed: _toRequestRoute,
-              child: Text("Request"),
+              child: const Text("Request"),
             ),
             RaisedButton(
               onPressed: _toFishRedux,
-              child: Text("FishRedux"),
+              child: const Text("FishRedux"),
             ),
             RaisedButton(
               onPressed: _toCounterFishRedux,
-              child: Text("CounterFishRedux"),
+              child: const Text("CounterFishRedux"),
             ),
             RaisedButton(
               onPressed: _toDraggablePage,
-              child: Text("Draggable"),
+              child: const Text("Draggable"),
             ),
             RaisedButton(
               onPressed: _toAnimationPage,
-              child: Text("Animation"),
+              child: const Text("Animation"),
             ),
             RaisedButton(
               onPressed: _toFadeInAndOutAnim,
-              child: Text("FadeInAndOut"),
+              child: const Text("FadeInAndOut"),
             ),
-            RaisedButton(onPressed: _toExplicitAnimation,
-              child: Text("ExplicitAnimation"),)
+            RaisedButton(
+              onPressed: _toExplicitAnimation,
+              child: const Text("ExplicitAnimation"),
+            ),
+            RaisedButton(
+              onPressed: _toAnimatedList,
+              child: const Text("AnimatedList"),
+            ),
+            RaisedButton(
+              onPressed: _toHeroAnimation,
+              child: const Text('HeroAnimation'),
+            ),
+            RaisedButton(
+              onPressed: _toRadialHeroAnimation,
+              child: const Text('RadialHeroAnimation'),
+            )
           ],
         ),
       ),
