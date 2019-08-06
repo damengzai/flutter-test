@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
-import 'package:test_flutter/fish_redux/counter_fish_redux/main_page.dart';
-import 'package:test_flutter/fish_redux/main_page.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
@@ -33,11 +31,6 @@ class MyApp extends StatelessWidget {
           '/viewPager': (BuildContext context) => new ViewPagerDemo(),
           //viewpager
           '/request': (BuildContext context) => new RequestRoute(),
-          //fish redux
-          '/fishRedux': (BuildContext context) => new FishReduxMainPage(),
-          //counter fish redux
-          '/counterFishRedux': (BuildContext context) =>
-              new CounterFishReduxPageStateless(),
           //Draggable
           '/draggable': (BuildContext context) => new DraggableWidgetPage(),
           //animation

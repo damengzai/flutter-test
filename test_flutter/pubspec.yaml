@@ -29,10 +29,6 @@ dependencies:
   #tuple
   tuple: ^1.0.2
 
-
-  #https://pub.flutter-io.cn/packages/fish_redux#-installing-tab-
-  #fish_redux
-  fish_redux: ^0.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
