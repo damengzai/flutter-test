@@ -46,12 +46,13 @@ public class MainActivity extends FlutterActivity {
             }
         });
 
+        //2. EventChannel native调用Flutter部分
         new EventChannel(getFlutterView(), EVENT_CHANNEL).setStreamHandler(new EventChannel.StreamHandler() {
             @Override
             public void onListen(Object o, EventChannel.EventSink eventSink) {
-                Log.e("----","----onListen");
+                Log.e("----", "----onListen");
                 BroadcastReceiver chargingBroadcastReceiver = createChargingBroadcaseReceiver(eventSink);
-                MainActivity.this.registerReceiver(chargingBroadcastReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                MainActivity.this.registerReceiver(chargingBroadcastReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             }
 
             @Override
@@ -82,7 +83,7 @@ public class MainActivity extends FlutterActivity {
             public void onReceive(Context context, Intent intent) {
 
                 int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                Log.e("----","----onReceive"+status);
+                Log.e("----", "----onReceive" + status);
                 if (status == BatteryManager.BATTERY_STATUS_UNKNOWN) {
                     eventSink.error("UNAVALIABLE", "charging status is unavailable", null);
                 } else {
