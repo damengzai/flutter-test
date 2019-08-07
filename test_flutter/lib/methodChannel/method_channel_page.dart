@@ -9,10 +9,10 @@ class MethodChannelPage extends StatefulWidget {
 }
 
 class _MethodChannelPageState extends State<MethodChannelPage> {
-  static const platform = const MethodChannel('');
-
-  //
+  ///MethodChannel:Flutter调用Native
+  static const platform = const MethodChannel('testflutter');
   String _batteryLevel = '';
+  String _batteryStatus = '';
 
   //方法通道的方法是异步的
   Future<Null> _getBatteryLevel() async {
@@ -29,6 +29,30 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     });
   }
 
+  ///EventChannel:Native调用Flutter
+  static const _eventChannel = const EventChannel('charging');
+
+  void listenNativeEvent() {
+    _eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
+  }
+
+  void _onEvent(Object object) {
+    String s = "Battery is ${object == 'charging' ? '' : 'dis'}Charging";
+    setState(() {
+      _batteryStatus = s;
+    });
+  }
+
+  void _onError(Object err) {
+    print("Battery status unknown");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    listenNativeEvent();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -40,6 +64,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
               child: const Text('getBatteryLevel'),
             ),
             Text(_batteryLevel),
+            Text(_batteryStatus),
           ],
         ),
       ),
