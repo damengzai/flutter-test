@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import io.flutter.app.FlutterActivity;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugins.GeneratedPluginRegistrant;
+import io.flutter.plugins.PluginRegistrant;
 import io.flutter.plugins.ViewRegistrant;
 
 /**
@@ -18,7 +17,7 @@ public class MainActivity extends FlutterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GeneratedPluginRegistrant.registerWith(this,this, getFlutterView());
+        PluginRegistrant.registerWith(this,this, getFlutterView());
 
         TextView t = new TextView(this);
         t.setText("TTTEEEXXXTTT");

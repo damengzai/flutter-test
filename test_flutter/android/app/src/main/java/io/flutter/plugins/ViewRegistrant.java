@@ -8,7 +8,7 @@ import io.flutter.plugins.view.TextViewFactory;
 
 public final class ViewRegistrant {
     public static void registerWith(PluginRegistry registry, TextView textView) {
-        final String key = GeneratedPluginRegistrant.class.getCanonicalName();
+        final String key = ViewRegistrant.class.getCanonicalName();
         if (registry.hasPlugin(key)) {
             return;
         }

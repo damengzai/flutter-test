@@ -56,17 +56,19 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              onPressed: _getBatteryLevel,
-              child: const Text('getBatteryLevel'),
-            ),
-            Text(_batteryLevel),
-            Text(_batteryStatus),
-            Expanded(child: AndroidView(viewType: 'TextView'))
-          ],
+      child: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                onPressed: _getBatteryLevel,
+                child: const Text('getBatteryLevel'),
+              ),
+              Text(_batteryLevel),
+              Text(_batteryStatus),
+              Expanded(child: AndroidView(viewType: 'TextView'))
+            ],
+          ),
         ),
       ),
     );
