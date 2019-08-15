@@ -65,6 +65,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
             ),
             Text(_batteryLevel),
             Text(_batteryStatus),
+            Expanded(child: AndroidView(viewType: 'TextView'))
           ],
         ),
       ),
