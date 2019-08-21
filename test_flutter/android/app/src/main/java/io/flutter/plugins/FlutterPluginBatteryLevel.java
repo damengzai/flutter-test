@@ -8,18 +8,23 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
+import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
 import static android.content.Context.BATTERY_SERVICE;
 
-public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandler, EventChannel.StreamHandler {
+public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandler, EventChannel.StreamHandler, BasicMessageChannel.MessageHandler {
     private Context mContext;
-    public FlutterPluginBatteryLevel(Context context){
+    private MethodChannel mMethodChannel;
+
+    public FlutterPluginBatteryLevel(Context context) {
         mContext = context;
     }
+
     @Override
     public void onListen(Object o, EventChannel.EventSink eventSink) {
         BroadcastReceiver chargingBroadcastReceiver = createChargingBroadcaseReceiver(eventSink);
@@ -35,14 +40,15 @@ public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandle
         return new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
                 Log.e("----", "----onReceive" + status);
                 if (status == BatteryManager.BATTERY_STATUS_UNKNOWN) {
                     eventSink.error("UNAVALIABLE", "charging status is unavailable", null);
                 } else {
+                    // Native给Flutter发通知
                     boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING;
                     eventSink.success(isCharging ? "charging" : "disCharging");
+                    invokeFlutterMethod();
                 }
             }
         };
@@ -50,6 +56,7 @@ public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandle
 
     @Override
     public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
+        // Flutter调用Native的方法
         if (methodCall.method.equals("getBatteryLevel")) {
             int batteryLevel = getBatteryLevel();
             if (batteryLevel != -1) {
@@ -74,5 +81,37 @@ public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandle
                     intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         }
         return batteryLevel;
+    }
+
+    public void setMethodChannel(MethodChannel methodChannel) {
+        this.mMethodChannel = methodChannel;
+    }
+
+    private void invokeFlutterMethod() {
+        if (this.mMethodChannel != null) {
+            this.mMethodChannel.invokeMethod("flutterMethod", "native参数", new MethodChannel.Result() {
+                @Override
+                public void success(Object o) {
+                    Toast.makeText(mContext, o.toString(), Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void error(String s, String s1, Object o) {
+
+                }
+
+                @Override
+                public void notImplemented() {
+
+                }
+            });
+        }
+    }
+    //
+
+    @Override
+    public void onMessage(Object o, BasicMessageChannel.Reply reply) {
+        Toast.makeText(mContext, o.toString(), Toast.LENGTH_LONG).show();
+        reply.reply(o.toString()+" back from native");
     }
 }

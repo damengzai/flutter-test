@@ -1,10 +1,13 @@
 package io.flutter.plugins;
 
 import android.content.Context;
+import android.widget.Toast;
 
+import io.flutter.plugin.common.BasicMessageChannel;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
+import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.view.FlutterView;
 
 public class PluginRegistrant {
@@ -25,6 +28,10 @@ public class PluginRegistrant {
         FlutterPluginBatteryLevel plugin = new FlutterPluginBatteryLevel(context);
         MethodChannel methodChannel = new MethodChannel(flutterView, METHOD_CHANNEL);
         methodChannel.setMethodCallHandler(plugin);
+        plugin.setMethodChannel(methodChannel);
+
+        BasicMessageChannel messageChannel = new BasicMessageChannel<>(flutterView, "messageChannel", StandardMessageCodec.INSTANCE);
+        messageChannel.setMessageHandler(plugin);
 
         EventChannel eventChannel = new EventChannel(flutterView, EVENT_CHANNEL);
         eventChannel.setStreamHandler(plugin);

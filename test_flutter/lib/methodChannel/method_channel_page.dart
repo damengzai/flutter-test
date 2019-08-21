@@ -10,15 +10,16 @@ class MethodChannelPage extends StatefulWidget {
 
 class _MethodChannelPageState extends State<MethodChannelPage> {
   ///MethodChannel:Flutter调用Native
-  static const platform = const MethodChannel('testflutter');
+  static const methodChannel = const MethodChannel('testflutter');
   String _batteryLevel = '';
   String _batteryStatus = '';
 
+  //Flutter调用Native方法
   //方法通道的方法是异步的
   Future<Null> _getBatteryLevel() async {
     String batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
+      final int result = await methodChannel.invokeMethod('getBatteryLevel');
       batteryLevel = 'Battery level $result .';
     } on PlatformException catch (e) {
       batteryLevel = 'Battery level unknown ${e.message}';
@@ -27,6 +28,29 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     setState(() {
       _batteryLevel = batteryLevel;
     });
+  }
+
+  //Native调用Flutter方法
+  Future<dynamic> _addNativeMethod(MethodCall methodCall) async {
+    switch (methodCall.method) {
+      case 'flutterMethod':
+        return 'flutter method called' + methodCall.arguments;
+        break;
+    }
+  }
+
+  void _addMethodForNative() {
+    methodChannel.setMethodCallHandler(_addNativeMethod);
+  }
+
+  //Flutter发消息到native
+  static const basicMessageChannel =
+      BasicMessageChannel('messageChannel', StandardMessageCodec());
+
+  Future<dynamic> _sendMessageToNative(String message) async {
+    String reply = await basicMessageChannel.send(message);
+    print(reply);
+    return reply;
   }
 
   ///EventChannel:Native调用Flutter
@@ -51,6 +75,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
   void initState() {
     super.initState();
     listenNativeEvent();
+    _addMethodForNative();
   }
 
   @override
@@ -60,11 +85,19 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
         child: Center(
           child: Column(
             children: <Widget>[
+              Text('-----------MethodChannel----------'),
               RaisedButton(
                 onPressed: _getBatteryLevel,
                 child: const Text('getBatteryLevel'),
               ),
               Text(_batteryLevel),
+              Text('-----------BasicMessageChannel----------'),
+              RaisedButton(
+                onPressed: () {
+                  _sendMessageToNative('message');
+                },
+                child: const Text('发消息到native'),
+              ),
               Text(_batteryStatus),
               Expanded(child: AndroidView(viewType: 'TextView'))
             ],
