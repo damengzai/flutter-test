@@ -1,37 +1,23 @@
 package io.flutter.plugins.view;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
+
+import java.util.Map;
 
 import io.flutter.plugin.common.MessageCodec;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
 
 public class TextViewFactory extends PlatformViewFactory {
-    private TextView mTextView;
+    private MessageCodec<Object> messageCodec;
 
     public TextViewFactory(MessageCodec<Object> createArgsCodec) {
         super(createArgsCodec);
-    }
-
-    public TextViewFactory(MessageCodec<Object> createArgsCodec, TextView textView) {
-        super(createArgsCodec);
-        this.mTextView = textView;
+        this.messageCodec = createArgsCodec;
     }
 
     @Override
     public PlatformView create(Context context, int i, Object o) {
-        return new PlatformView() {
-            @Override
-            public View getView() {
-                return mTextView;
-            }
-
-            @Override
-            public void dispose() {
-
-            }
-        };
+        return new MyTextview(context, messageCodec, i, (Map<String, Object>) o);
     }
 }

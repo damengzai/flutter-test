@@ -38,9 +38,11 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     switch (methodCall.method) {
       case 'flutterMethod':
         setState(() {
-          _calledFromNative = 'flutter method called from native with param ' + methodCall.arguments;
+          _calledFromNative = 'flutter method called from native with param ' +
+              methodCall.arguments;
         });
-        return 'flutter method called from native with param ' + methodCall.arguments;
+        return 'flutter method called from native with param ' +
+            methodCall.arguments;
         break;
     }
   }
@@ -61,6 +63,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     });
     return reply;
   }
+
   //Flutter接收Native发来的消息
   Future<dynamic> _receiveMessageFromNative(Object result) async {
     setState(() {
@@ -105,7 +108,8 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text('-----------MethodChannel----------电池电量是Flutter调用native方法返回的值，called from native是native调用flutter方法，传递过来的值'),
+              Text(
+                  '-----------MethodChannel----------电池电量是Flutter调用native方法返回的值，called from native是native调用flutter方法，传递过来的值'),
               RaisedButton(
                 onPressed: _getBatteryLevel,
                 child: const Text('getBatteryLevel'),
@@ -124,7 +128,12 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
               Text('--------------EventChannel--------------'),
               Text(_batteryStatus),
               Text('------------AndroidView-----------------'),
-              Expanded(child: AndroidView(viewType: 'TextView'))
+              Expanded(
+                  child: AndroidView(
+                viewType: 'TextView',
+                creationParams: {'text': 'TTTeeeXXXttt'},
+                creationParamsCodec: new StandardMessageCodec(),
+              ))
             ],
           ),
         ),

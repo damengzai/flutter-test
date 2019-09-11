@@ -19,8 +19,7 @@ public class MainActivity extends FlutterActivity {
         super.onCreate(savedInstanceState);
         PluginRegistrant.registerWith(this,this, getFlutterView());
 
-        TextView t = new TextView(this);
-        t.setText("TTTEEEXXXTTT");
-        ViewRegistrant.registerWith(this, t);
+
+        ViewRegistrant.registerWith(this);
     }
 }
