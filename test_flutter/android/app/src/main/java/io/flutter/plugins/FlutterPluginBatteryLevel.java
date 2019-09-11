@@ -20,6 +20,7 @@ import static android.content.Context.BATTERY_SERVICE;
 public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandler, EventChannel.StreamHandler, BasicMessageChannel.MessageHandler {
     private Context mContext;
     private MethodChannel mMethodChannel;
+    private BasicMessageChannel mBasicMessageChannel;
 
     public FlutterPluginBatteryLevel(Context context) {
         mContext = context;
@@ -49,6 +50,7 @@ public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandle
                     boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING;
                     eventSink.success(isCharging ? "charging" : "disCharging");
                     invokeFlutterMethod();
+                    sendMessageToFlutter();
                 }
             }
         };
@@ -105,6 +107,16 @@ public class FlutterPluginBatteryLevel implements MethodChannel.MethodCallHandle
 
                 }
             });
+        }
+    }
+
+    public void setBasicMessageChannel(BasicMessageChannel basicMessageChannel) {
+        this.mBasicMessageChannel = basicMessageChannel;
+    }
+
+    private void sendMessageToFlutter() {
+        if (this.mBasicMessageChannel != null) {
+            this.mBasicMessageChannel.send("Message From Native");
         }
     }
     //

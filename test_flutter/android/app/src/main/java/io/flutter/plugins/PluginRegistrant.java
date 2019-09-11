@@ -32,6 +32,7 @@ public class PluginRegistrant {
 
         BasicMessageChannel messageChannel = new BasicMessageChannel<>(flutterView, "messageChannel", StandardMessageCodec.INSTANCE);
         messageChannel.setMessageHandler(plugin);
+        plugin.setBasicMessageChannel(messageChannel);
 
         EventChannel eventChannel = new EventChannel(flutterView, EVENT_CHANNEL);
         eventChannel.setStreamHandler(plugin);

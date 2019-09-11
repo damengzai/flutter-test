@@ -9,10 +9,13 @@ class MethodChannelPage extends StatefulWidget {
 }
 
 class _MethodChannelPageState extends State<MethodChannelPage> {
-  ///MethodChannel:Flutter调用Native
+  ///MethodChannel:Flutter调用Native方法
   static const methodChannel = const MethodChannel('testflutter');
   String _batteryLevel = '';
   String _batteryStatus = '';
+  String _calledFromNative = '';
+  String _replayFromNative = '';
+  String _messageFromNative = '';
 
   //Flutter调用Native方法
   //方法通道的方法是异步的
@@ -34,7 +37,10 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
   Future<dynamic> _addNativeMethod(MethodCall methodCall) async {
     switch (methodCall.method) {
       case 'flutterMethod':
-        return 'flutter method called' + methodCall.arguments;
+        setState(() {
+          _calledFromNative = 'flutter method called from native with param ' + methodCall.arguments;
+        });
+        return 'flutter method called from native with param ' + methodCall.arguments;
         break;
     }
   }
@@ -50,7 +56,20 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
   Future<dynamic> _sendMessageToNative(String message) async {
     String reply = await basicMessageChannel.send(message);
     print(reply);
+    setState(() {
+      _replayFromNative = reply;
+    });
     return reply;
+  }
+  //Flutter接收Native发来的消息
+  Future<dynamic> _receiveMessageFromNative(Object result) async {
+    setState(() {
+      _messageFromNative = result.toString();
+    });
+  }
+
+  void _listenMessageFromNative() {
+    basicMessageChannel.setMessageHandler(_receiveMessageFromNative);
   }
 
   ///EventChannel:Native调用Flutter
@@ -76,6 +95,7 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
     super.initState();
     listenNativeEvent();
     _addMethodForNative();
+    _listenMessageFromNative();
   }
 
   @override
@@ -85,12 +105,13 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text('-----------MethodChannel----------'),
+              Text('-----------MethodChannel----------电池电量是Flutter调用native方法返回的值，called from native是native调用flutter方法，传递过来的值'),
               RaisedButton(
                 onPressed: _getBatteryLevel,
                 child: const Text('getBatteryLevel'),
               ),
               Text(_batteryLevel),
+              Text(_calledFromNative),
               Text('-----------BasicMessageChannel----------'),
               RaisedButton(
                 onPressed: () {
@@ -98,7 +119,11 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
                 },
                 child: const Text('发消息到native'),
               ),
+              Text(_replayFromNative),
+              Text(_messageFromNative),
+              Text('--------------EventChannel--------------'),
               Text(_batteryStatus),
+              Text('------------AndroidView-----------------'),
               Expanded(child: AndroidView(viewType: 'TextView'))
             ],
           ),
