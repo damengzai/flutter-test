@@ -129,11 +129,12 @@ class _MethodChannelPageState extends State<MethodChannelPage> {
               Text(_batteryStatus),
               Text('------------AndroidView-----------------'),
               Expanded(
-                  child: AndroidView(
-                viewType: 'TextView',
-                creationParams: {'text': 'TTTeeeXXXttt'},
-                creationParamsCodec: new StandardMessageCodec(),
-              ))
+                child: AndroidView(
+                  viewType: 'TextView',
+                  creationParams: {'text': 'TTTeeeXXXttt'},
+                  creationParamsCodec: new StandardMessageCodec(),
+                ),
+              )
             ],
           ),
         ),
