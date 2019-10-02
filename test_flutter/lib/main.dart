@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
+import 'package:test_flutter/ui/activity/CActivity.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
 import 'animation/animated_container_app.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
           //Native方法
           '/methodChannelPage': (BuildContext context) =>
               new MethodChannelPage(),
+          '/CAvtivity' : (BuildContext context) => new CActivity()
         });
   }
 }
@@ -123,6 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _toMethodChannelPage() {
     Navigator.pushNamed(context, '/methodChannelPage');
+  }
+
+  _toCActivityPage() {
+    Navigator.pushNamed(context, '/CAvtivity');
   }
 
   @override
@@ -211,6 +217,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: _toMethodChannelPage,
                 child: const Text('MethodChannel'),
               ),
+              RaisedButton(onPressed: _toCActivityPage,
+              child: const Text('CActivity'),)
             ],
           ),
         ),
