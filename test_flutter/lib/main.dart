@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
+import 'package:test_flutter/ui/LinearLayout.dart';
 import 'package:test_flutter/ui/activity/CActivity.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
 
@@ -56,7 +57,10 @@ class MyApp extends StatelessWidget {
           //Native方法
           '/methodChannelPage': (BuildContext context) =>
               new MethodChannelPage(),
-          '/CAvtivity' : (BuildContext context) => new CActivity()
+          //仿写Activity
+          '/CAvtivity': (BuildContext context) => new CActivity(),
+          //仿写LinearLayout
+          '/LinearLayout': (BuildContext context) => new LinearLayoutWidget(),
         });
   }
 }
@@ -129,6 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _toCActivityPage() {
     Navigator.pushNamed(context, '/CAvtivity');
+  }
+  
+  _toLinearLayout() {
+    Navigator.pushNamed(context, '/LinearLayout');
   }
 
   @override
@@ -217,8 +225,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: _toMethodChannelPage,
                 child: const Text('MethodChannel'),
               ),
-              RaisedButton(onPressed: _toCActivityPage,
-              child: const Text('CActivity'),)
+              RaisedButton(
+                onPressed: _toCActivityPage,
+                child: const Text('CActivity'),
+              ),
+              RaisedButton(
+                onPressed: _toLinearLayout,
+                child: const Text('LinearLayout'),
+              )
             ],
           ),
         ),
