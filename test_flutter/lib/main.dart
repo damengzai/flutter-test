@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
+import 'package:test_flutter/ui/FrameLayout.dart';
 import 'package:test_flutter/ui/LinearLayout.dart';
 import 'package:test_flutter/ui/activity/CActivity.dart';
 import 'package:test_flutter/viewpager/view_pager_demo.dart';
@@ -61,6 +62,8 @@ class MyApp extends StatelessWidget {
           '/CAvtivity': (BuildContext context) => new CActivity(),
           //仿写LinearLayout
           '/LinearLayout': (BuildContext context) => new LinearLayoutWidget(),
+          //仿写FrameLayout
+          '/FrameLayout': (BuildContext context) => new FrameLayout(),
         });
   }
 }
@@ -137,6 +140,10 @@ class _MyHomePageState extends State<MyHomePage> {
   
   _toLinearLayout() {
     Navigator.pushNamed(context, '/LinearLayout');
+  }
+
+  _toFrameLayout() {
+    Navigator.pushNamed(context, '/FrameLayout');
   }
 
   @override
@@ -232,6 +239,10 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 onPressed: _toLinearLayout,
                 child: const Text('LinearLayout'),
+              ),
+              RaisedButton(
+                onPressed: _toFrameLayout,
+                child: const Text('FrameLayout'),
               )
             ],
           ),
