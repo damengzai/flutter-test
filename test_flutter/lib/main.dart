@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
+import 'package:test_flutter/login/Home.dart';
+import 'package:test_flutter/login/constantParam.dart';
+import 'package:test_flutter/login/login.dart';
 import 'package:test_flutter/ui/FrameLayout.dart';
 import 'package:test_flutter/ui/LinearLayout.dart';
 import 'package:test_flutter/ui/activity/CActivity.dart';
@@ -24,9 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: defaultTheme,
         home: MyHomePage(title: 'Flutter Demo Home Page'),
         debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
@@ -64,6 +65,10 @@ class MyApp extends StatelessWidget {
           '/LinearLayout': (BuildContext context) => new LinearLayoutWidget(),
           //仿写FrameLayout
           '/FrameLayout': (BuildContext context) => new FrameLayout(),
+          //Login
+          '/Login': (BuildContext context) => new Login(),
+          //Home
+          '/Home': (BuildContext context) => new Home(),
         });
   }
 }
@@ -137,13 +142,17 @@ class _MyHomePageState extends State<MyHomePage> {
   _toCActivityPage() {
     Navigator.pushNamed(context, '/CAvtivity');
   }
-  
+
   _toLinearLayout() {
     Navigator.pushNamed(context, '/LinearLayout');
   }
 
   _toFrameLayout() {
     Navigator.pushNamed(context, '/FrameLayout');
+  }
+
+  _toLogin() {
+    Navigator.pushNamed(context, '/Login');
   }
 
   @override
@@ -243,15 +252,24 @@ class _MyHomePageState extends State<MyHomePage> {
               RaisedButton(
                 onPressed: _toFrameLayout,
                 child: const Text('FrameLayout'),
-              )
+              ),
+              RaisedButton(
+                onPressed: _toLogin,
+                child: const Text('Login'),
+              ),
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: new Theme(
+        data: ThemeData(
+          accentColor: Colors.red,
+        ),
+        child: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
