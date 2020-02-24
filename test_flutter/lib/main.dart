@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/WOW/AnimatedListWidget.dart';
+import 'package:test_flutter/WOW/DismissibleWidget.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/login/Home.dart';
@@ -69,6 +71,12 @@ class MyApp extends StatelessWidget {
           '/Login': (BuildContext context) => new Login(),
           //Home
           '/Home': (BuildContext context) => new Home(),
+          //DismissibleWidget
+          '/DismissibleWidget': (BuildContext context) =>
+              new DismissibleWidget(),
+          //AnimatedListWidget
+          '/AnimatedListWidget': (BuildContext context) =>
+              new AnimatedListWidget(),
         });
   }
 }
@@ -155,6 +163,14 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.pushNamed(context, '/Login');
   }
 
+  _toDismissibleWidget() {
+    Navigator.pushNamed(context, '/DismissibleWidget');
+  }
+
+  _toNewNamedPage(routeName) {
+    Navigator.pushNamed(context, routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -191,11 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.display1,
+                'times:$_counter',
               ),
               RaisedButton(
                 onPressed: _toRefreshListViewDemo,
@@ -257,6 +269,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: _toLogin,
                 child: const Text('Login'),
               ),
+              RaisedButton(
+                onPressed: _toDismissibleWidget,
+                child: const Text('DismissibleWidget'),
+              ),
+              RaisedButton(
+                onPressed: ()=>_toNewNamedPage('/AnimatedListWidget'),
+                child: Text('AnimatedListWidget'),
+              )
             ],
           ),
         ),
