@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/WOW/AnimatedIconWidget.dart';
 import 'package:test_flutter/WOW/AnimatedListWidget.dart';
 import 'package:test_flutter/WOW/DismissibleWidget.dart';
 import 'package:test_flutter/dio/request.dart';
@@ -43,24 +44,19 @@ class MyApp extends StatelessWidget {
           //animation
           '/animation': (BuildContext context) => new AnimatedContainerApp(),
           //fadeInAndOutAnimation
-          '/fadeInAndOutAnim': (BuildContext context) =>
-              new FadeInAndOutBoxPage(),
+          '/fadeInAndOutAnim': (BuildContext context) => new FadeInAndOutBoxPage(),
           //explicitAnimation 显式动画，更多的实现自己的效果
-          '/explicitAnimation': (BuildContext context) =>
-              new ExplicitAnimationPage(),
+          '/explicitAnimation': (BuildContext context) => new ExplicitAnimationPage(),
           //AnimatedList
           '/animatedList': (BuildContext context) => new AnimatedListSample(),
           //HeroAnimation
           '/heroAnimation': (BuildContext context) => new HeroAnimation(),
           //HeroAnimationPage2
-          '/heroAnimationPage2': (BuildContext context) =>
-              new HeroAnimationPage(),
+          '/heroAnimationPage2': (BuildContext context) => new HeroAnimationPage(),
           //RadialHeroAnimation
-          '/radialHeroAnimation': (BuildContext context) =>
-              new RadialExpansionDemo(),
+          '/radialHeroAnimation': (BuildContext context) => new RadialExpansionDemo(),
           //Native方法
-          '/methodChannelPage': (BuildContext context) =>
-              new MethodChannelPage(),
+          '/methodChannelPage': (BuildContext context) => new MethodChannelPage(),
           //仿写Activity
           '/CAvtivity': (BuildContext context) => new CActivity(),
           //仿写LinearLayout
@@ -72,11 +68,10 @@ class MyApp extends StatelessWidget {
           //Home
           '/Home': (BuildContext context) => new Home(),
           //DismissibleWidget
-          '/DismissibleWidget': (BuildContext context) =>
-              new DismissibleWidget(),
+          '/DismissibleWidget': (BuildContext context) => new DismissibleWidget(),
           //AnimatedListWidget
-          '/AnimatedListWidget': (BuildContext context) =>
-              new AnimatedListWidget(),
+          '/AnimatedListWidget': (BuildContext context) => new AnimatedListWidget(),
+          '/AnimatedIconWidget': (BuildContext context) => new AnimatedIconWidget(),
         });
   }
 }
@@ -274,8 +269,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('DismissibleWidget'),
               ),
               RaisedButton(
-                onPressed: ()=>_toNewNamedPage('/AnimatedListWidget'),
+                onPressed: () => _toNewNamedPage('/AnimatedListWidget'),
                 child: Text('AnimatedListWidget'),
+              ),
+              RaisedButton(
+                onPressed: () => _toNewNamedPage('/AnimatedIconWidget'),
+                child: Text('AnimatedIconWidget'),
               )
             ],
           ),
