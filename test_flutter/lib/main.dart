@@ -25,7 +25,6 @@ import 'methodChannel/method_channel_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -87,199 +86,83 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  Map<String, String> routMap = {
+    '/refreshList': '列表页',
+    '/viewPager': 'Viewpager',
+    '/request': 'Request',
+    '/draggable': 'Draggable',
+    '/animation': 'Animation',
+    '/fadeInAndOutAnim': 'FadeInAndOut',
+    '/explicitAnimation': 'ExplicitAnimation',
+    '/animatedList': 'AnimatedList',
+    '/heroAnimation': 'HeroAnimation',
+    '/radialHeroAnimation': 'RadialHeroAnimation',
+    '/methodChannelPage': 'MethodChannel',
+    '/CAvtivity': 'CActivity',
+    '/LinearLayout': 'LinearLayout',
+    '/FrameLayout': 'FrameLayout',
+    '/Login': 'Login',
+    '/DismissibleWidget': 'DismissibleWidget',
+    '/AnimatedListWidget': 'AnimatedListWidget',
+    '/AnimatedIconWidget': 'AnimatedIconWidget'
+  };
+
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
-  }
-
-  void _toRefreshListViewDemo() {
-    Navigator.pushNamed(context, '/refreshList');
-  }
-
-  void _toViewPagerDemo() {
-    Navigator.pushNamed(context, '/viewPager');
-  }
-
-  _toRequestRoute() {
-    Navigator.pushNamed(context, '/request');
-  }
-
-  _toDraggablePage() {
-    Navigator.pushNamed(context, '/draggable');
-  }
-
-  _toAnimationPage() {
-    Navigator.pushNamed(context, '/animation');
-  }
-
-  _toFadeInAndOutAnim() {
-    Navigator.pushNamed(context, '/fadeInAndOutAnim');
-  }
-
-  _toExplicitAnimation() {
-    Navigator.pushNamed(context, '/explicitAnimation');
-  }
-
-  _toAnimatedList() {
-    Navigator.pushNamed(context, '/animatedList');
-  }
-
-  _toHeroAnimation() {
-    Navigator.pushNamed(context, '/heroAnimation');
-  }
-
-  _toRadialHeroAnimation() {
-    Navigator.pushNamed(context, '/radialHeroAnimation');
-  }
-
-  _toMethodChannelPage() {
-    Navigator.pushNamed(context, '/methodChannelPage');
-  }
-
-  _toCActivityPage() {
-    Navigator.pushNamed(context, '/CAvtivity');
-  }
-
-  _toLinearLayout() {
-    Navigator.pushNamed(context, '/LinearLayout');
-  }
-
-  _toFrameLayout() {
-    Navigator.pushNamed(context, '/FrameLayout');
-  }
-
-  _toLogin() {
-    Navigator.pushNamed(context, '/Login');
-  }
-
-  _toDismissibleWidget() {
-    Navigator.pushNamed(context, '/DismissibleWidget');
   }
 
   _toNewNamedPage(routeName) {
     Navigator.pushNamed(context, routeName);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: SingleChildScrollView(
-          child: Column(
-            // Column is also layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'times:$_counter',
-              ),
-              RaisedButton(
-                onPressed: _toRefreshListViewDemo,
-                child: const Text("列表页"),
-              ),
-              RaisedButton(
-                onPressed: _toViewPagerDemo,
-                child: const Text("Viewpager"),
-              ),
-              RaisedButton(
-                onPressed: _toRequestRoute,
-                child: const Text("Request"),
-              ),
-              RaisedButton(
-                onPressed: _toDraggablePage,
-                child: const Text("Draggable"),
-              ),
-              RaisedButton(
-                onPressed: _toAnimationPage,
-                child: const Text("Animation"),
-              ),
-              RaisedButton(
-                onPressed: _toFadeInAndOutAnim,
-                child: const Text("FadeInAndOut"),
-              ),
-              RaisedButton(
-                onPressed: _toExplicitAnimation,
-                child: const Text("ExplicitAnimation"),
-              ),
-              RaisedButton(
-                onPressed: _toAnimatedList,
-                child: const Text("AnimatedList"),
-              ),
-              RaisedButton(
-                onPressed: _toHeroAnimation,
-                child: const Text('HeroAnimation'),
-              ),
-              RaisedButton(
-                onPressed: _toRadialHeroAnimation,
-                child: const Text('RadialHeroAnimation'),
-              ),
-              RaisedButton(
-                onPressed: _toMethodChannelPage,
-                child: const Text('MethodChannel'),
-              ),
-              RaisedButton(
-                onPressed: _toCActivityPage,
-                child: const Text('CActivity'),
-              ),
-              RaisedButton(
-                onPressed: _toLinearLayout,
-                child: const Text('LinearLayout'),
-              ),
-              RaisedButton(
-                onPressed: _toFrameLayout,
-                child: const Text('FrameLayout'),
-              ),
-              RaisedButton(
-                onPressed: _toLogin,
-                child: const Text('Login'),
-              ),
-              RaisedButton(
-                onPressed: _toDismissibleWidget,
-                child: const Text('DismissibleWidget'),
-              ),
-              RaisedButton(
-                onPressed: () => _toNewNamedPage('/AnimatedListWidget'),
-                child: Text('AnimatedListWidget'),
-              ),
-              RaisedButton(
-                onPressed: () => _toNewNamedPage('/AnimatedIconWidget'),
-                child: Text('AnimatedIconWidget'),
-              )
-            ],
-          ),
+  List<Widget> widgetItems = [];
+
+  _generateWidgetItems() {
+    routMap.forEach((key, value) => {widgetItems.add(_buildItem(key, value))});
+  }
+
+  Widget _buildItem(String routeName, String pageName) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey,
+          width: 1,
         ),
       ),
+      child: RaisedButton(
+        onPressed: () {
+          _toNewNamedPage(routeName);
+        },
+        child: Text(pageName),
+      ),
+    );
+  }
+
+  Widget _itemBuilder(int index) {
+    return widgetItems[index];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _generateWidgetItems();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title + 'times:$_counter'),
+      ),
+      body: GridView.builder(
+          itemCount: widgetItems.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 2,
+          ),
+          itemBuilder: (BuildContext context, int index) => _itemBuilder(index)),
       floatingActionButton: new Theme(
         data: ThemeData(
           accentColor: Colors.red,
@@ -289,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
           tooltip: 'Increment',
           child: Icon(Icons.add),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
