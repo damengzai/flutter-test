@@ -50,6 +50,7 @@ class _AnimatedIconState extends State<_AnimatedIconPage> with SingleTickerProvi
 
   Widget _generateItem(int index) {
     return Container(
+      key: Key(index.toString()),
       child: Center(
         child: AnimatedIcon(
           icon: _animatedIconsList[index],
