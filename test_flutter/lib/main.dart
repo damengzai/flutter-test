@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:test_flutter/WOW/AnimatedCrossFadeWidget.dart';
 import 'package:test_flutter/WOW/AnimatedIconWidget.dart';
 import 'package:test_flutter/WOW/AnimatedListWidget.dart';
+import 'package:test_flutter/WOW/AnimatedSwitcherWidget.dart';
+import 'package:test_flutter/WOW/AnimatedImplicitWidget.dart';
 import 'package:test_flutter/WOW/DismissibleWidget.dart';
+import 'package:test_flutter/WOW/TransitionWidget.dart';
+import 'package:test_flutter/WOW/TweenAnimationBuildWidget.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/login/Home.dart';
@@ -22,7 +28,14 @@ import 'animation/hero/radial/radial_hero_animation.dart';
 import 'customPaintView/draggable_widget_page.dart';
 import 'methodChannel/method_channel_page.dart';
 
-void main() => runApp(MyApp());
+void main() {
+//  debugPaintBaselinesEnabled = true; // 以可视的方式调试布局，边界
+//  debugPaintBaselinesEnabled = true; // 标识组件基线
+//  debugPaintPointersEnabled = true; // 标识点击的对象
+//  debugPaintLayerBordersEnabled = true; //标识每层边界
+//  debugRepaintRainbowEnabled = true; // 重绘时候被一组旋转色覆盖
+  return runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -70,7 +83,18 @@ class MyApp extends StatelessWidget {
           '/DismissibleWidget': (BuildContext context) => new DismissibleWidget(),
           //AnimatedListWidget
           '/AnimatedListWidget': (BuildContext context) => new AnimatedListWidget(),
+          //AnimatedIconWidget
           '/AnimatedIconWidget': (BuildContext context) => new AnimatedIconWidget(),
+          //AnimatedSwitcher
+          '/AnimatedSwitcher': (BuildContext context) => new AnimatedSwitcherWidget(),
+          //AnimatedCrossFade
+          '/AnimatedCrossFade': (BuildContext context) => new AnimatedCrossFadeWidget(),
+          //AnimatedImplicitWidget
+          '/AnimatedImplicitWidget': (BuildContext context) => new AnimatedImplicitWidget(),
+          //TweenAnimationBuilderWidget
+          '/TweenAnimationBuilderWidget':(BuildContext context) => new TweenAnimationBuilderWidget(),
+          //TransitionWidget
+          '/TransitionWidget': (BuildContext context) => new TransitionWidget(),
         });
   }
 }
@@ -104,7 +128,12 @@ class _MyHomePageState extends State<MyHomePage> {
     '/Login': 'Login',
     '/DismissibleWidget': 'DismissibleWidget',
     '/AnimatedListWidget': 'AnimatedListWidget',
-    '/AnimatedIconWidget': 'AnimatedIconWidget'
+    '/AnimatedIconWidget': 'AnimatedIconWidget',
+    '/AnimatedSwitcher': 'AnimatedSwitcher',
+    '/AnimatedCrossFade': 'AnimatedCrossFade',
+    '/AnimatedImplicitWidget': 'AnimatedImplicitWidget',
+    '/TweenAnimationBuilderWidget': 'TweenAnimationBuilderWidget',
+    '/TransitionWidget': 'TransitionWidget'
   };
 
   void _incrementCounter() {
@@ -152,27 +181,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title + 'times:$_counter'),
-      ),
-      body: GridView.builder(
-          itemCount: widgetItems.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 2,
+    return WillPopScope( // 物理返回键拦截
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title + 'times:$_counter'),
           ),
-          itemBuilder: (BuildContext context, int index) => _itemBuilder(index)),
-      floatingActionButton: new Theme(
-        data: ThemeData(
-          accentColor: Colors.red,
+          body: GridView.builder(
+              itemCount: widgetItems.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 2,
+              ),
+              itemBuilder: (BuildContext context, int index) => _itemBuilder(index)),
+          floatingActionButton: new Theme(
+            data: ThemeData(
+              accentColor: Colors.red,
+            ),
+            child: FloatingActionButton(
+              onPressed: _incrementCounter,
+              tooltip: 'Increment',
+              child: Icon(Icons.add),
+            ),
+          ),
         ),
-        child: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        ),
-      ),
-    );
+        onWillPop: () async {
+          return true;
+        });
   }
 }

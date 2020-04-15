@@ -14,5 +14,6 @@ final ThemeData defaultTheme = new ThemeData(
   textTheme: TextTheme(
     title: TextStyle(color: Colors.white, fontSize: 33),
     display1: TextStyle(color: Colors.black, fontSize: 40),
+    display2: TextStyle(color: Colors.grey, fontSize: 10),
   ),
 );
