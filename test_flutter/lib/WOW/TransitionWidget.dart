@@ -69,17 +69,18 @@ class _TransitionWidgetState extends State<_TransitionWidgetPage> with SingleTic
       ),
     );
 
-    _positionedRelativeRectAnimation = Tween<RelativeRect>(
-      begin: RelativeRect.fromLTRB(1, 2, 3, 4),
-      end: RelativeRect.fromLTRB(40, 30, 20, 10),
+    //Tween lerp方法只有begin + (end - begin) * t，对于复杂的参数，没有重写运算符（+、-）的话，要自己继承Tween重新lerp，所以使用官方对应的FooTween
+    _positionedRelativeRectAnimation = RelativeRectTween(
+      begin: RelativeRect.fromLTRB(1, 1, 1, 1),
+      end: RelativeRect.fromLTRB(10, 10, 10, 10),
     ).animate(_controller);
 
-    _relativePositionedRectAnimation = Tween<Rect>(
-      begin: Rect.fromLTRB(4, 3, 2, 1),
-      end: Rect.fromLTRB(1, 2, 3, 4),
+    _relativePositionedRectAnimation = RectTween(
+      begin: Rect.fromLTRB(1, 1, 1, 1),
+      end: Rect.fromLTRB(10, 10, 10, 10),
     ).animate(_controller);
 
-    _decoratedBoxAnimation = Tween<Decoration>(
+    _decoratedBoxAnimation = DecorationTween(
       begin: BoxDecoration(color: Colors.red, border: Border.all(color: Colors.blue), shape: BoxShape.rectangle),
       end: BoxDecoration(color: Colors.blue, border: Border.all(color: Colors.redAccent), shape: BoxShape.circle),
     ).animate(_controller);
@@ -129,24 +130,32 @@ class _TransitionWidgetState extends State<_TransitionWidgetPage> with SingleTic
               showText: 'FadeTransition',
             ),
           ),
-          Stack(
-            children: <Widget>[
-              PositionedTransition(
-                rect: _positionedRelativeRectAnimation,
-                child: _ViewWidget(
-                  showText: 'PositionedTransition',
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            child: Stack(
+              children: <Widget>[
+                PositionedTransition(
+                  rect: _positionedRelativeRectAnimation,
+                  child: _ViewWidget(
+                    showText: 'PositionedTransition',
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          Stack(
-            children: <Widget>[
-              RelativePositionedTransition(
-                rect: _relativePositionedRectAnimation,
-                size: Size(55, 55),
-                child: _ViewWidget(showText: 'RelativePositionedTransition'),
-              )
-            ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 120,
+            child: Stack(
+              children: <Widget>[
+                RelativePositionedTransition(
+                  rect: _relativePositionedRectAnimation,
+                  size: Size(55, 55),
+                  child: _ViewWidget(showText: 'RelativePositionedTransition'),
+                )
+              ],
+            ),
           ),
           DecoratedBoxTransition(
             decoration: _decoratedBoxAnimation,
