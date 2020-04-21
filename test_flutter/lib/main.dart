@@ -6,6 +6,7 @@ import 'package:test_flutter/WOW/AnimatedListWidget.dart';
 import 'package:test_flutter/WOW/AnimatedSwitcherWidget.dart';
 import 'package:test_flutter/WOW/AnimatedImplicitWidget.dart';
 import 'package:test_flutter/WOW/DismissibleWidget.dart';
+import 'package:test_flutter/WOW/ExplicitAnimationWidget.dart';
 import 'package:test_flutter/WOW/TransitionWidget.dart';
 import 'package:test_flutter/WOW/TweenAnimationBuildWidget.dart';
 import 'package:test_flutter/dio/request.dart';
@@ -95,6 +96,8 @@ class MyApp extends StatelessWidget {
           '/TweenAnimationBuilderWidget':(BuildContext context) => new TweenAnimationBuilderWidget(),
           //TransitionWidget
           '/TransitionWidget': (BuildContext context) => new TransitionWidget(),
+          //ExplicitAnimationWidget
+          '/ExplicitAnimationWidget': (BuildContext context) => new ExplicitAnimationWidget(),
         });
   }
 }
@@ -133,7 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
     '/AnimatedCrossFade': 'AnimatedCrossFade',
     '/AnimatedImplicitWidget': 'AnimatedImplicitWidget',
     '/TweenAnimationBuilderWidget': 'TweenAnimationBuilderWidget',
-    '/TransitionWidget': 'TransitionWidget'
+    '/TransitionWidget': 'TransitionWidget',
+    '/ExplicitAnimationWidget': 'ExplicitAnimationWidget'
   };
 
   void _incrementCounter() {

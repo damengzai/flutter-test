@@ -21,11 +21,11 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 2),
         children: <Widget>[
           // AnimatedContainer
           AnimatedContainer(
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             width: _containerSelected ? 200.0 : 100.0,
             height: _containerSelected ? 100.0 : 200.0,
             alignment: _containerSelected ? Alignment.center : AlignmentDirectional.topCenter,
@@ -46,7 +46,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
           ),
           //AnimatedPadding
           AnimatedPadding(
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             padding: EdgeInsets.all(_containerSelected ? 20 : 1),
             curve: Curves.fastOutSlowIn,
             child: Stack(
@@ -59,7 +59,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
           // AnimatedAlign
           AnimatedAlign(
             alignment: _containerSelected ? Alignment.topLeft : Alignment.bottomRight,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             child: Stack(
               children: <Widget>[
                 FlutterLogo(size: 75),
@@ -94,7 +94,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
                     Text("AnimatedPositionedDirectional"),
                   ],
                 ),
-                duration: Duration(seconds: 1),
+                duration: Duration(seconds: 2),
                 start: _containerSelected ? 0 : 10,
                 top: _containerSelected ? 0 : 10,
               )
@@ -102,7 +102,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
           ),
           AnimatedOpacity(
             opacity: _containerSelected ? 1 : 0.4,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             child: Stack(
               children: <Widget>[
                 FlutterLogo(size: 75),
@@ -118,13 +118,13 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
                 fontStyle: _containerSelected ? FontStyle.normal : FontStyle.italic,
                 backgroundColor: _containerSelected ? Colors.white : Colors.grey),
             textAlign: _containerSelected ? TextAlign.left : TextAlign.right,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
           ),
           AnimatedPhysicalModel(
             child: Center(
               child: Stack(
                 children: <Widget>[
-                  FlutterLogo(size: 75),
+                  FlutterLogo(size: 40),
                   Text("AnimatedPhysicalModel"),
                 ],
               ),
@@ -133,7 +133,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
             elevation: _containerSelected ? 1 : 6,
             color: _containerSelected ? Colors.blue[100] : Colors.blue[900],
             shadowColor: _containerSelected ? Colors.grey[200] : Colors.grey[800],
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
           ),
           Theme(
             data: Theme.of(context).copyWith(
@@ -164,7 +164,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
               size: 40,
             ),
             crossFadeState: _containerSelected ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             layoutBuilder: (Widget topChild, Key topChildKey, Widget bottomChild, Key bottomChildKey) {
               return Stack(
                 overflow: Overflow.visible,
@@ -179,6 +179,7 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
                     key: topChildKey,
                     child: topChild,
                   ),
+                  Text("AnimatedCrossFade")
                 ],
               );
             },
@@ -186,18 +187,28 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
           Stack(
             children: <Widget>[
               AnimatedSize(
-                child: FlutterLogo(
-                  size: _containerSelected ? 75 : 20,
+                child: Stack(
+                  children: <Widget>[
+                    FlutterLogo(
+                      size: _containerSelected ? 75 : 20,
+                    ),
+                    Text("AnimatedSize"),
+                  ],
                 ),
-                duration: Duration(seconds: 1),
+                duration: Duration(seconds: 2),
                 vsync: this,
               )
             ],
           ),
           AnimatedSwitcher(
-            duration: Duration(seconds: 1),
-            reverseDuration: Duration(seconds: 1),
-            child: Text(_containerSelected ? '40' : '04'),
+            duration: Duration(seconds: 2),
+            reverseDuration: Duration(seconds: 2),
+            child: Column(
+              children: <Widget>[
+                Text(_containerSelected ? '40' : '04'),
+                Text("AnimatedSwitcher"),
+              ],
+            ),
             key: Key(_containerSelected ? '40' : '04'),
           ),
         ],

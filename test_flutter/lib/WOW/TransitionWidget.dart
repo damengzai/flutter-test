@@ -57,7 +57,12 @@ class _TransitionWidgetState extends State<_TransitionWidgetPage> with SingleTic
     _rotationDoubleAnimation = Tween<double>(
       begin: 0.0,
       end: 0.05,
-    ).animate(_controller);
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOutSine,
+      ),
+    );
 
     _sizeDoubleAnimation = Tween<double>(
       begin: 0.1,
@@ -88,82 +93,85 @@ class _TransitionWidgetState extends State<_TransitionWidgetPage> with SingleTic
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          SlideTransition(
-            position: _slideOffsetAnimation,
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: _ViewWidget(
-                showText: 'SlideTransition',
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SlideTransition(
+              position: _slideOffsetAnimation,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: _ViewWidget(
+                  showText: 'SlideTransition',
+                ),
               ),
             ),
-          ),
-          ScaleTransition(
-            scale: _scaleDoubleAnimation,
-            child: _ViewWidget(
-              showText: 'ScaleTransition',
+            ScaleTransition(
+              scale: _scaleDoubleAnimation,
+              child: _ViewWidget(
+                showText: 'ScaleTransition',
+              ),
             ),
-          ),
-          RotationTransition(
-            turns: _rotationDoubleAnimation,
-            child: _ViewWidget(
-              showText: 'RotationTransition',
+            RotationTransition(
+              turns: _rotationDoubleAnimation,
+              child: _ViewWidget(
+                showText: 'RotationTransition',
+              ),
             ),
-          ),
-          SizeTransition(
-            sizeFactor: _sizeDoubleAnimation,
-            child: _ViewWidget(
-              showText: 'SizeTransition',
+            SizeTransition(
+              sizeFactor: _sizeDoubleAnimation,
+              child: _ViewWidget(
+                showText: 'SizeTransition',
+              ),
             ),
-          ),
-          FadeTransition(
-            opacity: _controller,
-            child: _ViewWidget(
-              showText: 'FadeTransition',
+            FadeTransition(
+              opacity: _controller,
+              child: _ViewWidget(
+                showText: 'FadeTransition',
+              ),
             ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 100,
-            child: Stack(
-              children: <Widget>[
-                PositionedTransition(
-                  rect: _positionedRelativeRectAnimation,
-                  child: _ViewWidget(
-                    showText: 'PositionedTransition',
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: Stack(
+                children: <Widget>[
+                  PositionedTransition(
+                    rect: _positionedRelativeRectAnimation,
+                    child: _ViewWidget(
+                      showText: 'PositionedTransition',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 120,
-            child: Stack(
-              children: <Widget>[
-                RelativePositionedTransition(
-                  rect: _relativePositionedRectAnimation,
-                  size: Size(55, 55),
-                  child: _ViewWidget(showText: 'RelativePositionedTransition'),
-                )
-              ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 120,
+              child: Stack(
+                children: <Widget>[
+                  RelativePositionedTransition(
+                    rect: _relativePositionedRectAnimation,
+                    size: Size(55, 55),
+                    child: _ViewWidget(showText: 'RelativePositionedTransition'),
+                  )
+                ],
+              ),
             ),
-          ),
-          DecoratedBoxTransition(
-            decoration: _decoratedBoxAnimation,
-            child: _ViewWidget(
-              showText: 'DecoratedBoxTransition',
+            DecoratedBoxTransition(
+              decoration: _decoratedBoxAnimation,
+              child: _ViewWidget(
+                showText: 'DecoratedBoxTransition',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
