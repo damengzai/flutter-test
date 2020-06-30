@@ -21,7 +21,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   #dio
-  dio: ^2.1.0
+  dio: ^3.0.9
 
   #redux
   flutter_redux: ^0.5.3
@@ -29,9 +29,18 @@ dependencies:
   #tuple
   tuple: ^1.0.2
 
+  lpinyin: ^1.0.7
+
+  intl: ^0.15.7
+  url_launcher: 5.3.0
+  loading_more_list: any
+  pull_to_refresh_notification: any
+  extended_image: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  ff_annotation_route: any
 
 
 # For information on the generic Dart part of this file, see the
@@ -51,6 +60,9 @@ flutter:
    - images/beachball-alpha.png
    - images/binoculars-alpha.png
    - images/chair-alpha.png
+   - assets/data/china.json
+   - assets/467141054.jpg
+   - assets/flutterCandies_grey.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

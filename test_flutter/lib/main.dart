@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:test_flutter/StackTop/StackTop.dart';
 import 'package:test_flutter/WOW/AnimatedCrossFadeWidget.dart';
 import 'package:test_flutter/WOW/AnimatedIconWidget.dart';
 import 'package:test_flutter/WOW/AnimatedListWidget.dart';
@@ -10,11 +11,21 @@ import 'package:test_flutter/WOW/ExplicitAnimationWidget.dart';
 import 'package:test_flutter/WOW/TransitionWidget.dart';
 import 'package:test_flutter/WOW/TweenAnimationBuildWidget.dart';
 import 'package:test_flutter/customWidget/CustomWidget.dart';
+import 'package:test_flutter/detail/index.dart';
 import 'package:test_flutter/dio/request.dart';
 import 'package:test_flutter/listview/views/refresh_list_view_demo.dart';
 import 'package:test_flutter/login/Home.dart';
 import 'package:test_flutter/login/constantParam.dart';
 import 'package:test_flutter/login/login.dart';
+import 'package:test_flutter/nesScrollView/pages/dou_yin_ping_lun.dart';
+import 'package:test_flutter/nesScrollView/pages/dynamic_pinned_header_height.dart';
+import 'package:test_flutter/nesScrollView/pages/extened_nested_scroll_view_demo.dart';
+import 'package:test_flutter/nesScrollView/pages/load_more.dart';
+import 'package:test_flutter/nesScrollView/pages/main_page.dart';
+import 'package:test_flutter/nesScrollView/pages/pull_to_refresh.dart';
+import 'package:test_flutter/nesScrollView/pages/scroll_to_top.dart';
+import 'package:test_flutter/provider/providerRoute.dart';
+import 'package:test_flutter/suspensionView/index_suspension.dart';
 import 'package:test_flutter/ui/FrameLayout.dart';
 import 'package:test_flutter/ui/LinearLayout.dart';
 import 'package:test_flutter/ui/activity/CActivity.dart';
@@ -101,6 +112,23 @@ class MyApp extends StatelessWidget {
           '/ExplicitAnimationWidget': (BuildContext context) => new ExplicitAnimationWidget(),
           //CustomWidget
           '/CustomWidget': (BuildContext context) => new CustomWidget(),
+          //Detail
+          '/Detail': (BuildContext context) => new Detail(),
+          //吸顶
+          '/Suspension': (BuildContext context) => new IndexSuspensionRoute(),
+          //吸顶
+          '/StackTop': (BuildContext context) => new StackTop(),
+          //
+          '/PingLunDemo': (BuildContext context) => new PingLunDemo(),
+          '/TextFieldPage': (BuildContext context) => new TextFieldPage(text: 'text',),
+          '/DouYinPingLunDemo': (BuildContext context) => new DouYinPingLunDemo(),
+          '/LoadMoreDemo': (BuildContext context) => new LoadMoreDemo(),
+          '/MainPage': (BuildContext context) => new MainPage(),
+          '/OldExtendedNestedScrollViewDemo': (BuildContext context) => new OldExtendedNestedScrollViewDemo(),
+          '/DynamicPinnedHeaderHeightDemo': (BuildContext context) => new DynamicPinnedHeaderHeightDemo(),
+          '/PullToRefreshDemo': (BuildContext context) => new PullToRefreshDemo(),
+          '/ScrollToTopDemo': (BuildContext context) => new ScrollToTopDemo(),
+          '/Provider': (BuildContext context) => new ProviderRoute()
         });
   }
 }
@@ -141,7 +169,20 @@ class _MyHomePageState extends State<MyHomePage> {
     '/TweenAnimationBuilderWidget': 'TweenAnimationBuilderWidget',
     '/TransitionWidget': 'TransitionWidget',
     '/ExplicitAnimationWidget': 'ExplicitAnimationWidget',
-    '/CustomWidget': 'CustomWidget'
+    '/CustomWidget': 'CustomWidget',
+    '/Detail': '常规详情',
+    '/Suspension': '城市列表吸顶',
+    '/StackTop': '吸顶',
+    '/PingLunDemo': 'PingLunDemo',
+    '/TextFieldPage': 'TextFieldPage',
+    '/DouYinPingLunDemo': 'DouYinPingLunDemo',
+    '/LoadMoreDemo': 'LoadMoreDemo',
+    '/MainPage': 'MainPage',
+    '/OldExtendedNestedScrollViewDemo': 'OldExtendedNestedScrollViewDemo',
+    '/DynamicPinnedHeaderHeightDemo': 'DynamicPinnedHeaderHeightDemo',
+    '/PullToRefreshDemo': 'PullToRefreshDemo',
+    '/ScrollToTopDemo':'ScrollToTopDemo',
+    '/Provider': 'Provider'
   };
 
   void _incrementCounter() {
