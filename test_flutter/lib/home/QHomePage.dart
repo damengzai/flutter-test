@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'view/SearchPanel.dart';
 
 class QHomePage extends StatelessWidget {
   @override
@@ -14,11 +15,21 @@ class _QHomePageWidget extends StatefulWidget {
 class _QHomePageState<_QHomePageWidget> extends State with SingleTickerProviderStateMixin {
   TabController tabController;
   GlobalKey globalKey = GlobalKey();
+  int _curTab = 0;
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(vsync: this, length: 4);
+    tabController.addListener(() {
+      if (!tabController.indexIsChanging) {
+        // Your code goes here.
+        // To get index of current tab use tabController.index
+        setState(() {
+          _curTab = tabController.index;
+        });
+      }
+    });
   }
 
   @override
@@ -28,7 +39,7 @@ class _QHomePageState<_QHomePageWidget> extends State with SingleTickerProviderS
       body: Stack(
         children: [
           SizedBox(
-            height: 500,
+            height: 400,
             width: MediaQuery.of(context).size.width,
             child: PageView.builder(
               itemBuilder: (BuildContext context, int index) {
@@ -45,15 +56,15 @@ class _QHomePageState<_QHomePageWidget> extends State with SingleTickerProviderS
           ),
           Container(
             constraints: BoxConstraints(minHeight: 200),
-            margin: EdgeInsets.only(top: 250),
-            width: MediaQuery.of(context).size.width - 20,
+            margin: EdgeInsets.only(top: 160),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TabBar(
                   key: globalKey,
                   controller: tabController,
-                  indicator: BoxDecoration(color: Colors.black54),
+                  indicator: BoxDecoration(
+                      color: Colors.white30, image: DecorationImage(image: AssetImage("assets/tabLeft.png"))),
                   indicatorColor: Colors.blue,
                   tabs: [
                     Text("国内港澳台", softWrap: false, overflow: TextOverflow.visible, style: TextStyle(color: Colors.red)),
@@ -63,34 +74,31 @@ class _QHomePageState<_QHomePageWidget> extends State with SingleTickerProviderS
                   ],
                 ),
                 SizedBox(
-                  height: 300,
                   width: MediaQuery.of(context).size.width - 20,
-                  child: TabBarView(
-                    controller: tabController,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(color: Colors.black),
-                        margin: EdgeInsets.only(left: 10),
-                        height: 50,
-                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width - 20,
-                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width - 20,
-                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width - 20,
-                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
-                      )
-                    ],
+                  child: SearchPanel(
+                    curTab: _curTab,
                   ),
+//                  TabBarView(
+//                    controller: tabController,
+//                    children: [
+//                      SearchPanel(),
+//                      Container(
+//                        height: 50,
+//                        width: MediaQuery.of(context).size.width - 20,
+//                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
+//                      ),
+//                      Container(
+//                        height: 50,
+//                        width: MediaQuery.of(context).size.width - 20,
+//                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
+//                      ),
+//                      Container(
+//                        height: 50,
+//                        width: MediaQuery.of(context).size.width - 20,
+//                        child: Text("国内港澳台", style: TextStyle(fontSize: 40, color: Colors.blue)),
+//                      )
+//                    ],
+//                  ),
                 ),
               ],
             ),

@@ -63,6 +63,8 @@ flutter:
    - assets/data/china.json
    - assets/467141054.jpg
    - assets/flutterCandies_grey.png
+   - assets/tabLeft.png
+   - assets/tabRight.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

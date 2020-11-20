@@ -156,11 +156,11 @@ class _AnimatedState extends State<_AnimatedPage> with SingleTickerProviderState
           ),
           AnimatedCrossFade(
             firstChild: FlutterLogo(
-              colors: Colors.pink,
+              textColor: Colors.pink,
               size: 40,
             ),
             secondChild: FlutterLogo(
-              colors: Colors.blueGrey,
+              textColor: Colors.blueGrey,
               size: 40,
             ),
             crossFadeState: _containerSelected ? CrossFadeState.showFirst : CrossFadeState.showSecond,
